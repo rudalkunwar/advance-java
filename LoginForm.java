@@ -17,8 +17,8 @@ public class LoginForm extends JFrame {
 
         l1.setBounds(100, 100, 100, 20);
         l2.setBounds(100, 150, 100, 20);
-        t1.setBounds(220, 100, 150, 20);  // Increased width for better appearance
-        t2.setBounds(220, 150, 150, 20);  // Increased width for better appearance
+        t1.setBounds(220, 100, 150, 20);  //nce Increased width for better appearance
+        t2.setBounds(220, 150, 150, 20);  // Increased width for better appeara
         btn.setBounds(200, 200, 100, 30); // Slightly increased height for better button visibility
 
         add(l1);
