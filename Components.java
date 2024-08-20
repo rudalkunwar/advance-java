@@ -19,16 +19,20 @@ public class Comp extends JFrame{
 
             rb1 = new JRadioButton("Male");
             rb2 = new JRadioButton("Female");
+            ButtonGroup bg = new ButtonGroup();
+
+            bg.add(rb1);
+            bg.add(rb2);
 
             String[] name = {"rudal","aaksh","pratik"};
 
             cmb = new JComboBox(name);
 
 
-            cb1.setBounds(100,100,50,20);
-            cb2.setBounds(200,100,50,20);
-            rb1.setBounds(100,200,50,20);
-            rb2.setBounds(200,200,50,20);
+            cb1.setBounds(100,100,100,20);
+            cb2.setBounds(200,100,100,20);
+            rb1.setBounds(100,200,100,20);
+            rb2.setBounds(200,200,100,20);
             l1.setBounds(200,300,50,20);
             cmb.setBounds(200,400,50,20);
 
