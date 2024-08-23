@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>Java Web</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>Student Registration</div>
+        <form action="register" method="post">
+                <input  type="number" name="id" placeholder="Enter student id "/><br/>
+                <input type="text" name="name" placeholder="Enter Name"/><br/>  
+                <input  type="text" name="address" placeholder="Enter Address"/><br/>
+                <div>
+                    <input type="radio" name="faculty" value="bca"/><span>BCA</span>               
+                    <input type="radio" name="faculty" value="bim"/><span>BIM</span>
+                    <input type="radio" name="faculty" value="csit"/><span>CSIT</span>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+    </body>
+</html>
+
+
+import java.io.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.sql.*;
+public class MyServlet extends HttpServlet {
+    
+    protected void doPost(HttpServletRequest req , HttpServletResponse res) throws ServletException, IOException{
+        
+        res.setContentType("text/html");
+        
+        int id = Integer.parseInt(req.getParameter("id"));        
+        String name = req.getParameter("name");
+        String address = req.getParameter("address");
+        String faculty = req.getParameter("faculty");
+        PrintWriter out = res.getWriter();
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/javadb","root","");
+            PreparedStatement pst = con.prepareStatement("insert into students values (?,?,?,?)");
+            pst.setInt(1, id);
+            pst.setString(2,name);            
+            pst.setString(3,address);
+            pst.setString(4,faculty);
+            
+            if(pst.executeUpdate()>0){
+                
+            out.write("Data inserted");
+            
+            }else{
+                            
+               out.write("Failed to insert data");
+
+            }
+            con.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+}
+
+<web-app>
+         
+    <servlet>
+        <servlet-name>MyServlet</servlet-name>
+        <servlet-class>first.MyServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>MyServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    
+</web-app>

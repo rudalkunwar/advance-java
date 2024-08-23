@@ -1,0 +1,38 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>Factorial Calculator</h1>
+        <div>
+            <form method="get" action="FactResult.jsp">
+                <input type ="number" name="number" required placeholder="Enter number "/>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </body>
+</html>
+
+//FactResult.jsp
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <%
+//          int num = Integer.parseInt(request.getParameter("number")); 
+            int num = 6;
+            int fact = 1;
+            for(int i = 1 ; i < num ; i++){
+            fact += fact * i ;
+            }
+            %>
+            <label>The factorial of <%= num %> is <%= fact %> </label>
+    </body>
+</html>
