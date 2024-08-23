@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>Java Web Application</div>
+        <div>Cookie set </div>
+        <form action="setcookie" method="get">
+            
+            <input type="text" name="name" placeholder="Enter name"/>
+            
+            <button type="submit">Submit</button>
+            
+        </form>
+        
+    </body>
+</html>
+
+//CookieServlet
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
+import java.io.*;
+public class CookieServlet extends HttpServlet {
+    
+    protected void doGet(HttpServletRequest req , HttpServletResponse res) throws ServletException, IOException{
+        
+        res.setContentType("text/html");
+        String name = req.getParameter("name");
+        PrintWriter out = res.getWriter();
+        
+        Cookie ck = new Cookie("username",name);
+        res.addCookie(ck);
+        
+        out.write("<form action='viewcookie' method='get'>");
+        out.write("<button type='submit'>View Cookie</button>");
+        out.write("</form>");
+        
+    }
+    
+}
+
+//view cookie servlet 
+import java.io.*;
+import jakarta.servlet.http.*;
+import jakarta.servlet.*;
+public class ViewCookie extends HttpServlet {
+    protected void doGet(HttpServletRequest req , HttpServletResponse res) throws IOException,ServletException{
+        res.setContentType("text/html");
+        
+        Cookie[] cks = req.getCookies();
+        
+        
+        PrintWriter out = res.getWriter();
+        out.write("Cookie is : "+cks[0].getValue());
+        out.close();
+    }
+}
